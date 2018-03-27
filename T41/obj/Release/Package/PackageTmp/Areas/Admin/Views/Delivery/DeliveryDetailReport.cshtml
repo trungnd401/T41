@@ -1,0 +1,288 @@
+﻿@{
+//  Layout = null;
+}
+
+<!-- daterange picker -->
+<link rel="stylesheet" href="/Areas/Admin/Content/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+<!-- bootstrap datepicker -->
+@*<link rel="stylesheet" href="~/Content/plugins/iCheck/all.css">*@
+<!-- Bootstrap Color Picker -->
+@*<link rel="stylesheet" href="~/Content/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">*@
+
+<title>Báo cáo chi tiết hoạt động phát</title>
+<section class="content">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Báo cáo chi tiết hoạt động phát</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Kênh phát</label>
+                        <select class="form-control select2" style="width: 100%;" id="channel">
+                            <option selected="selected" value="0">Tất cả</option>
+                            <option value="1">Ems Enterprise</option>
+                            <option value="2">Smart phone</option>
+                        </select>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label>Bưu tá phát</label>
+                        <select class="form-control select2" style="width: 100%;" id="postman">
+                            <option selected="selected" value="0">Tất cả</option>
+                        </select>
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Bưu cục</label>
+                        <select class="form-control select2" style="width: 100%;" id="postcode">
+                            <option selected="selected" value="0">Tất cả</option>
+
+                        </select>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label>Tuyến phát</label>
+                        <select class="form-control select2" style="width: 100%;" id="deliveryroute">
+                            <option selected="selected" value="0">Tất cả</option>
+                        </select>
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Khoảng thời gian</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="reservation">
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        <select class="form-control select2" style="width: 100%;" id="status">
+                            <option selected="selected" value="0">Tất cả</option>
+                            <option value="1">Phát thành công</option>
+                            <option value="2">Phát không thành công</option>
+                        </select>
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-default btn-lrg ajax" id="btnreport">Lấy số liệu</button>
+                </td>
+            </tr>
+            <div class="box-header">
+                <h3 class="box-title">Tổng hợp sản lượng đi phát</h3>
+            </div>
+            <table id="example1" class="table table-bordered table-hover">
+                <thead>
+                    <tr class="bg-light-blue color-palette">
+                        <th>STT</th>
+                        <th>Chỉ tiêu</th>
+                        <th>Sản lượng</th>
+                        <th>Khối lượng</th>
+                        <th>Phải thu</th>
+                        <th>Đã thu</th>
+                    </tr>
+                </thead>
+                <tbody id="summarydeliveryreport"></tbody>
+            </table>
+            <div class="box-header">
+                <h3 class="box-title">Bảng kê chi tiết phát theo mã bưu gửi</h3>
+            </div>
+            <div>
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="bg-light-blue color-palette">
+                            <th rowspan="2">STT</th>
+                            <th rowspan="2">Kênh</th>
+                            <th rowspan="2">Id giao dịch</th>
+                            <th rowspan="2">Thời gian phát</th>
+                            <th rowspan="2">Thời gian hệ thống</th>
+                            <th rowspan="2">Mã vận đơn</th>
+                            <th rowspan="2">Loại DV</th>
+                            <th>Đến phát</th>
+                            <th>Tồn phát</th>
+                            <th colspan="3" class="text-center">Hoạt động phát</th>
+                            <th colspan="2" class="text-center">Tiền phải thu (đ)</th>
+                            <th rowspan="2">Bưu cục</th>
+                            <th rowspan="2">Tuyến phát</th>
+                            <th rowspan="2">Bưu tá</th>
+                        </tr>
+                        <tr class="bg-light-blue color-palette">
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+
+                            <th>Ngày giờ</th>
+                            <th>Ngày giờ</th>
+
+                            <th>Kết quả phát</th>
+                            <th>Lý do không phát được</th>
+                            <th>Nơi phát</th>
+
+                            <th>Cước</th>
+                            <th>Thu hộ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listdeliveryreport"></tbody>
+                    @*<tfoot>
+                            <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                            </tr>
+                        </tfoot>*@
+                </table>
+            </div>
+            <div class="row">
+                @*<div class="col-sm-5">
+                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite"></div>
+                    </div>*@
+                <div id="page-selection" class="col-sm-12 text-center">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.box-body -->
+
+
+
+
+
+</section>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<!-- ./wrapper -->
+<!-- REQUIRED JS SCRIPTS -->
+<!-- jQuery 3 -->
+<script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="~/Content/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/Content/dist/js/adminlte.min.js"></script>
+<!-- date-range-picker -->
+<script src="~/Content/bower_components/moment/min/moment.min.js"></script>
+<script src="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>*@
+
+<!--jquery.bootpag.min-->>
+
+
+<script>
+    $(function () {
+        $('#reservation').daterangepicker()
+    })
+    $("#btnreport").click(function () {
+        // Summary
+        summary();
+        // Detail
+        detail(1);
+    });
+    function summary() {
+        $.ajax({
+            url: '@Url.Action("SummaryDeliveryReport", "Delivery")',
+            dataType: 'html',
+            data:
+                {
+                    channel: $("#channel").val(),
+                    postman: $("#postman").val(),
+                    deliveryroute: $("#deliveryroute").val(),
+                    postcode: $("#postcode").val(),
+                    fromdate: $('#reservation').data('daterangepicker').startDate.format('DD/MM/YYYY'),
+                    todate: $('#reservation').data('daterangepicker').endDate.format('DD/MM/YYYY'),
+                    status: $("#status").val()
+                },
+            success: function (result) {
+                $('#summarydeliveryreport').html(result);
+            }
+        })
+    }
+    function detail(p) {
+        $.ajax({
+            url: '@Url.Action("ListDetailedDeliveryReport", "Delivery")',
+            dataType: 'html',
+            data:
+                {
+                    channel: $("#channel").val(),
+                    postman: $("#postman").val(),
+                    deliveryroute: $("#deliveryroute").val(),
+                    postcode: $("#postcode").val(),
+                    fromdate: $('#reservation').data('daterangepicker').startDate.format('DD/MM/YYYY'),
+                    todate: $('#reservation').data('daterangepicker').endDate.format('DD/MM/YYYY'),
+                    status: $("#status").val(),
+                    page: p
+                },
+            success: function (result) {
+                $('#listdeliveryreport').html(result);
+                if (p == 1) refreshPaging();
+            }
+        })
+    }
+    function refreshPaging() {
+        $('#page-selection').bootpag({
+            total: $('#total_page').val(),
+            maxVisible: 10,
+        }).on("page", function (event, /* page number here */ num) {
+            detail(num);
+        });
+    }
+    $(document).ready(function () {
+        $.getJSON("/Delivery/ListPostCode", function (data) {
+            $.each(data, function (i, data) {
+                $('<option>',
+                   {
+                       value: data.POST_CODE,
+                       text: data.POST_CODE_NAME
+                   }).html(data.POST_CODE + '-' + data.POST_CODE_NAME).appendTo("#postcode");
+            });
+        })
+        $.getJSON("/Delivery/ListPostMan", function (data) {
+            $.each(data, function (i, data) {
+                $('<option>',
+                   {
+                       value: data.POSTMAN_ID,
+                       text: data.POSTMAN_NAME
+                   }).html(data.POSTMAN_ID + '-' + data.POSTMAN_NAME).appendTo("#postman");
+            });
+        })
+        $('#postcode').change(function () {
+            $.ajax({
+                url: "/Delivery/ListDeliveryRouteByPostCode",
+                dataType: "json",
+                data: { postcode: $("#postcode").val() },
+                success: function (data) {
+                    $('#deliveryroute').html('<option value=0>Tuyến phát</option>');
+                    jQuery.each(data, function (i, val) {
+                        $('#deliveryroute').html($('#deliveryroute').html() +
+                            "<option value='" + val.POST_CODE + "'>" + val.POST_CODE + '-' + val.POST_CODE_NAME + "</option>");
+                    });
+                }
+            });
+        })
+    });
+</script>
+
+

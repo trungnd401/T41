@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    int i = 0; i = (ViewBag.currentPageIndex - 1) * ViewBag.PageSize;
+    foreach (var c in Model)
+    {
+        <tr>
+            <td>@(i+1)</td>
+            <td>@c.CHANNEL </td>
+            <td>@c.ID_PROCESS </td>
+            <td>@c.DELIVERY_DATE_TIME</td>
+            <td>@c.SYSTEM_DATE_TIME </td>
+            <td>@c.LADING_CODE </td>
+            <td>@c.SERVICE_TYPE </td>
+            <td>@c.COME_DATE </td>       
+            <td>@c.REMAIN_DATE </td>
+            <td>@c.DELIVERY_RESULT </td>
+            <td>@c.REASON </td>
+            <td>@c.DELIVERY_PLACE </td>
+            <td>@c.FEE </td>
+            <td>@c.AMOUNT </td>       
+            <td>@c.DELIVERY_POST_CODE </td>         
+            <td>@c.DELIVERY_ROUTE_CODE </td>      
+            <td>@c.POSTMAN_ID </td>              
+        </tr>
+        i++;
+    }
+}
+<input type="hidden" value="@ViewBag.currentPageIndex" id="currentPage" />
+<input type="hidden" id="total_page" value="@ViewBag.total_page" />
+<input type="hidden" id="total" value="@ViewBag.total" />

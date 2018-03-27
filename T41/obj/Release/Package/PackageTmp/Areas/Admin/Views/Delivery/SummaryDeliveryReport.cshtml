@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+@*@if (ViewBag.StoreList.Length > 0)*@
+
+<tr>
+    <td></td>
+    <td>Tổng số:</td>
+    <td>@ViewBag.TotalDelivery</td>
+    <td>@ViewBag.TotalWeight.ToString("#,##0")</td>
+    <td>@ViewBag.TotalCollect.ToString("#,##0")</td>
+    <td>@ViewBag.TotalCollected.ToString("#,##0")</td>
+</tr>
+<tr>
+    <td>1 </td>
+    <td>Sản lượng cần phát</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>0</td>
+</tr>
+<tr>
+    <td>- </td>
+    <td>Đến phát</td>
+    <td>@ViewBag.ComeDeliveryTotal.COUNT</td>
+    <td>@ViewBag.ComeDeliveryTotal.TOTAL_WEIGHT.ToString("#,##0")</td>
+    <td>@ViewBag.ComeDeliveryTotal.TOTAL_AMOUNT.ToString("#,##0")</td>
+    <td>0</td>
+</tr>
+<tr>
+    <td>- </td>
+    <td>Tồn phát</td>
+    <td>@ViewBag.RemainDeliveryTotal.COUNT</td>
+    <td>@ViewBag.RemainDeliveryTotal.TOTAL_WEIGHT.ToString("#,##0")</td>
+    <td>@ViewBag.RemainDeliveryTotal.TOTAL_AMOUNT.ToString("#,##0")</td>
+    <td>0</td>
+</tr>
+<tr>
+    <td>2 </td>
+    <td>Đã đi phát</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>0</td>
+</tr>
+<tr>
+    <td>- </td>
+    <td>Phát thành công</td>
+    <td>@ViewBag.SuccessDeliveryTotal.COUNT</td>
+    <td>@ViewBag.SuccessDeliveryTotal.TOTAL_WEIGHT.ToString("#,##0")</td>
+    <td>0</td>
+    <td>@ViewBag.SuccessDeliveryTotal.TOTAL_AMOUNT.ToString("#,##0")</td>
+</tr>
+<tr>
+    <td>- </td>
+    <td>Phát không thành công</td>
+    <td>@ViewBag.UnsuccessDeliveryTotal.COUNT</td>
+    <td>@ViewBag.UnsuccessDeliveryTotal.TOTAL_WEIGHT.ToString("#,##0")</td>
+    <td>@ViewBag.UnsuccessDeliveryTotal.TOTAL_AMOUNT.ToString("#,##0")</td>
+    <td>0</td>
+</tr>
+<tr>
+    <td>3 </td>
+    <td>Chuyển hoàn</td>
+    <td>@ViewBag.ReturnDeliveryTotal.COUNT</td>
+    <td>@ViewBag.ReturnDeliveryTotal.TOTAL_WEIGHT.ToString("#,##0")</td>
+    <td>@ViewBag.ReturnDeliveryTotal.TOTAL_AMOUNT.ToString("#,##0")</td>
+    <td>0</td>
+</tr>
+
+
